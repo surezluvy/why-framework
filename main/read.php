@@ -15,7 +15,10 @@
     <tr>
         <td><?php echo $d['username'] ?></td>
         <td><?php echo $d['pass'] ?></td>
-        <td><a href="../setting/process.php?type=delete&table=user&id=<?php echo $d['id_user'] ?>">Hapus</a></td>
+        <td>
+            <a href="../setting/process.php?type=delete&table=user&id=<?php echo $d['id_user'] ?>">Hapus</a>
+            <a href="edit_user.php?id=<?php echo $d['id_user'] ?>">Edit</a>
+        </td>
     </tr>
     <?php } ?>
 </table>

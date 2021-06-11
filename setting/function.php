@@ -32,6 +32,23 @@
             
             header('location: ../main/index.php?page=read');
         }
+        
+        function edit_user($table, $row, $value){
+            $combine_row = implode(",",$row);
+            $combine_value = implode(",",$value);
+
+            $pecah1 = explode(",",$combine_row);
+            $pecah2 = explode(",",$combine_value);
+            for($i = 0; $i < 2; $i++){
+                $result = array();
+                array_push($result, $pecah1[$i]);
+                array_push($result, $pecah2[$i]);
+                $final = implode("='",$result)."'";
+                
+                mysqli_query($this->connect, "UPDATE $table SET $final WHERE id_user='$_GET[id]'") or die(mysqli_error($this->connect));
+            }
+            header('location: ../main/index.php?page=read');
+        }
     }
 
     // class route{
