@@ -15,7 +15,12 @@
         }
 
         $data->create($table, $row, $value);
-    } if($_GET['type'] == 'update'){
+    } if($_GET['type'] == 'delete'){
+        $data = new crud();
         
+        $table = $_GET['table'];
+        $id = $_GET['id'];
+
+        $data->delete($table, $id);
     }
 ?>

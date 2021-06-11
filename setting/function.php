@@ -24,6 +24,13 @@
             $combine_value = "'".implode("','",$value)."'";
             mysqli_query($this->connect, "INSERT INTO $table ($combine_row) VALUES($combine_value)") or die(mysqli_error($this->connect));
             
+            header('location: ../main/index.php?page=read');
+        }
+        
+        function delete($table, $id){
+            mysqli_query($this->connect, "DELETE FROM $table WHERE id_user='$id'") or die(mysqli_error($this->connect));
+            
+            header('location: ../main/index.php?page=read');
         }
     }
 
