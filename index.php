@@ -14,9 +14,9 @@
     // get($project_location, $request);
 
     require_once('setting/function2.php');
-    $kot = new routes();
+    $route = new routes();
 
-    $kot->get('/', 'main/read.php');
-    $kot->get('/create', 'main/create.php');
-    $kot->get('/create_blog', 'main/create_blog.php');
+    $route->get('/', 'mainController', 'index');
+    $route->get('/create', 'mainController', 'create');
+    $route->get('/create_blog', 'mainController', 'create_blog');
 

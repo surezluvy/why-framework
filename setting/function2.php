@@ -53,21 +53,42 @@
     }
 
     class routes{
-        function get($url, $file, $id = ""){
-            
+        function get($urls, $controllers, $functions){
             $request = $_SERVER['REQUEST_URI'];
             $project_location = "/why-framework";
 
-            $explode_url = explode(" ",$url);
-            $explode_file = explode(" ",$file);
+            $explode_url = explode(" ",$urls);
+            $explode_controller = explode(" ",$controllers);
+            $explode_function = explode(" ",$functions);
 
             for($i = 0; $i < count($explode_url); $i++){
+
                 $combine_url = $project_location.$explode_url[$i];
-                $combine_file = $explode_file[$i];
+                $combine_controller = $explode_controller[$i];
+                $combine_function = $explode_function[$i];
+                
+                $url = $combine_url;
+                $controller = "controller/".$combine_controller.".php";
+                $function = $combine_function;
+
                 if($request == $combine_url){
-                    require $combine_file;
+                    require_once($controller);
+                    $function($url[$i]);
                 }
             }
+            
+            // $project_location = "/why-framework";
+
+            // $explode_url = explode(" ",$url);
+            // $explode_file = explode(" ",$file);
+
+            // for($i = 0; $i < count($explode_url); $i++){
+            //     $combine_url = $project_location.$explode_url[$i];
+            //     $combine_file = $explode_file[$i];
+            //     if($request == $combine_url){
+            //         require $combine_file;
+            //     }
+            // }
             
             // switch ($request) {
             //     case $project.'/' :
