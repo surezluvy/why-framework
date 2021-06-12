@@ -20,12 +20,17 @@
             return $result;
         }
 
-        function create($table, $row, $value){
+        function create($table, $row, $value, $redirect){
+            $project_location = "/why-framework";
+            $combine_url = $project_location.$redirect;
+
             $combine_row = implode(",",$row);
             $combine_value = "'".implode("','",$value)."'";
-            mysqli_query($this->connect, "INSERT INTO $table ($combine_row) VALUES($combine_value)") or die(mysqli_error($this->connect));
+            $kodok = mysqli_query($this->connect, "INSERT INTO $table ($combine_row) VALUES($combine_value)");
             
-            header('location: ../main/index.php?page=read');
+            if($kodok){
+                header('location: '.$combine_url);
+            }
         }
         
         function delete($table, $id){
@@ -76,36 +81,24 @@
                     $function($url[$i]);
                 }
             }
-            
-            // $project_location = "/why-framework";
+        }
 
-            // $explode_url = explode(" ",$url);
-            // $explode_file = explode(" ",$file);
+        function post($url, $table, $redirect){
+            $request = $_SERVER['REQUEST_URI'];
+            $project_location = "/why-framework";
+            $combine_url = $project_location.$url;
 
-            // for($i = 0; $i < count($explode_url); $i++){
-            //     $combine_url = $project_location.$explode_url[$i];
-            //     $combine_file = $explode_file[$i];
-            //     if($request == $combine_url){
-            //         require $combine_file;
-            //     }
-            // }
+            $value = array();
+            $row = array();
+
+            $data = new main();
             
-            // switch ($request) {
-            //     case $project.'/' :
-            //         require "main/read.php";
-            //         break;
-            //     case $project.'/create' :
-            //         require "main/create.php";
-            //         break;
-            //     case $project.'/edit?id='.$id=$_GET['id'] :
-            //         require "main/edit_user.php";
-            //         break;
-            //     default:
-            //         http_response_code(404);
-            //         echo "404";
-            //         break;
-            // }
-            // echo $request;
+            foreach ($_POST as $name => $val){
+                array_push($value, $_POST[htmlspecialchars($name)]);
+                array_push($row, htmlspecialchars($name));
+            }
+            // print_r($data->create($table, $row, $value));
+            $data->create($table, $row, $value, $redirect);
         }
     }
     

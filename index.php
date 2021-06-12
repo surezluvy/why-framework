@@ -13,10 +13,12 @@
 
     // get($project_location, $request);
 
-    require_once('setting/function2.php');
+    require_once('setting/function.php');
     $route = new routes();
 
     $route->get('/', 'mainController', 'index');
     $route->get('/create', 'mainController', 'create');
     $route->get('/create_blog', 'mainController', 'create_blog');
+
+    $route->post('/create_process', 'user', '/');
 

@@ -1,5 +1,5 @@
 <?php
-    require_once('function2.php');
+    require_once('function.php');
 
     if($_GET['type'] == 'create'){
         $value = array();
@@ -8,13 +8,12 @@
 
         $data = new main();
         
-        foreach ($_POST as $name => $val)
-        {
+        foreach ($_POST as $name => $val){
             array_push($value, $_POST[htmlspecialchars($name)]);
             array_push($row, htmlspecialchars($name));
         }
 
-        $data->create($table, $row, $value);
+        $data->create($table, $row, $value, "ds");
     } else if($_GET['type'] == 'delete'){
         $data = new main();
 

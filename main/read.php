@@ -7,10 +7,7 @@
         <th>Aksi</th>
     </tr>
     <?php 
-        require_once('setting/function2.php');
-        $data = new main();
-        
-        foreach($data->all("user") as $d){
+        foreach($ambil_data as $d){
     ?>
     <tr>
         <td><?php echo $d['username'] ?></td>
