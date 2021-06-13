@@ -26,17 +26,19 @@
 
             $combine_row = implode(",",$row);
             $combine_value = "'".implode("','",$value)."'";
-            $kodok = mysqli_query($this->connect, "INSERT INTO $table ($combine_row) VALUES($combine_value)");
+            $true = mysqli_query($this->connect, "INSERT INTO $table ($combine_row) VALUES($combine_value)");
             
-            if($kodok){
-                header('location: '.$combine_url);
+            if($true){
+                echo "<script>location='$combine_url';</script>";
             }
         }
         
-        function delete($table, $id){
+        function delete($table, $id, $redirect){
+            $project_location = "/why-framework";
+            $combine_url = $project_location.$redirect;
             mysqli_query($this->connect, "DELETE FROM $table WHERE id_user='$id'") or die(mysqli_error($this->connect));
             
-            header('location: /why-framework/');
+            echo "<script>location='$combine_url';</script>";
         }
         
         function update($table, $row, $value){
@@ -59,6 +61,11 @@
 
     class routes{
         function get($urls, $controllers, $functions){
+            $id = '';
+            if(!empty($_GET['id'])){
+                $id = $_GET['id'];
+            }
+
             $request = $_SERVER['REQUEST_URI'];
             $project_location = "/why-framework";
 
@@ -76,10 +83,17 @@
                 $controller = "controller/".$combine_controller.".php";
                 $function = $combine_function;
 
-                if($request == $combine_url){
+                if($request == $url){
                     require_once($controller);
-                    $function($url[$i]);
-                }
+                    $function($id);
+                } 
+                // else if($_GET){
+                //     require_once($controller);
+                //     $function($_GET['id']);
+                //     // print_r($_SERVER['REQUEST_URI']);
+                //     // echo "============================<br>";
+                //     print_r($function);
+                // }
             }
         }
 

@@ -16,6 +16,16 @@
         require_once('main/create_blog.php');
     }
 
-    function edit_user(){
+    function delete($id){
+        $main = new main();
+        $main->delete("user", $id, "/");
+    }
 
+    function edit(){
+        require_once('main/edit_user.php');
+    }
+
+    function process_edit($id){
+        $main = new main();
+        $main->update("user", $id, "/");
     }

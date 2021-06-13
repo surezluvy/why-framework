@@ -20,7 +20,7 @@
         $table = $_GET['table'];
         $id = $_GET['id'];
 
-        $data->delete($table, $id);
+        $data->delete($table, $id, "d");
     } else if($_GET['type'] == 'edit_user'){
         $value = array();
         $row = array();
