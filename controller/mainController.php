@@ -26,6 +26,17 @@
     }
 
     function process_edit($id){
-        $main = new main();
-        $main->update("user", $id, "/");
+        $value = array();
+        $row = array();
+        $table = $_GET['table'];
+
+        $data = new main();
+        
+        foreach ($_POST as $name => $val)
+        {
+            array_push($value, $_POST[htmlspecialchars($name)]);
+            array_push($row, htmlspecialchars($name));
+        }
+        
+        $data->update("user", $row, $value, "/");
     }

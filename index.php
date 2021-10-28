@@ -16,7 +16,7 @@
     if($_GET){
         $route->get('/delete?id='.$_GET['id'], 'mainController', 'delete');
         $route->get('/edit?id='.$_GET['id'], 'mainController', 'edit');
-        $route->get('/process_edit?id='.$_GET['id'], 'mainController', 'edit');
+        $route->get('/process_edit?id='.$_GET['id'], 'mainController', 'process_edit');
     }
 
     // Digunakan ketika suatu proses yang bersangkutan dengan database
