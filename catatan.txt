@@ -15,4 +15,4 @@ CARA PENGGUNAAN create()
 2. Lalu pada form action, masukan sama persis dengan route yang tadi dibuat
 
 TODO LIST
-1. Jika mengatur project_location, user harus manual ke functio.php dan atur sendiri
+1. Jika mengatur project_location, user harus manual ke function.php dan atur sendiri (SOLVED)
