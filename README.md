@@ -21,3 +21,20 @@
 ## TODO LIST
 
 1. Jika mengatur project_location, user harus manual ke function.php dan atur sendiri (SOLVED)
+2. Menangani Invalid argument supplied for foreach() jika data kosong: (SOLVED)
+   <?php
+       if (is_array($ambil_data) || is_object($ambil_data)){
+       foreach($ambil_data as $d){
+   ?>
+
+   <?php }} >
+3. Mengambil $_GET['id'] manual (SOLVED)
+    function delete($id){
+        $main = new main();
+        $main->delete("user", $id, "/");
+    } (LAMA)
+    function delete($get){
+      $id = $get['id'];
+      $another_param = $get['another_param'];
+      $main->delete("user", $id, "/");
+    }

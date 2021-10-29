@@ -2,7 +2,6 @@
 class main
 {
     public $project_location = "/why-framework";
-
     var $host = "localhost";
     var $username = "root";
     var $password = "";
@@ -83,6 +82,7 @@ class routes
         }
 
         $request = $_SERVER['REQUEST_URI'];
+
         $main = new Main();
         $project_location = $main->project_location;
 
@@ -100,9 +100,27 @@ class routes
             $controller = "controller/" . $combine_controller . ".php";
             $function = $combine_function;
 
+            $get_all = preg_split('/(&|\?)/', $request);
+            $get_temp = array();
+            $get_temp2 = array();
+            $get_temp3 = array();
+            $get_temp4 = array();
+
+            for ($i=1; $i < count($get_all); $i++) {
+              array_push($get_temp, $get_all[$i]);
+              for ($l=0; $l < count($get_temp) ; $l++) {
+                array_push($get_temp2, explode("=", $get_temp[$l]));
+              }
+            }
+            for ($k=0; $k < count($get_temp2) ; $k++) {
+              array_push($get_temp3, $get_temp2[$k][0]);
+              array_push($get_temp4, $get_temp2[$k][1]);
+            }
+            $get_final = array_combine($get_temp3, $get_temp4);
+
             if ($request == $url) {
                 require_once($controller);
-                $function($id);
+                $function($get_final);
             }
         }
     }
